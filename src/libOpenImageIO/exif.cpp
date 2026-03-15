@@ -385,7 +385,48 @@ makernote_handler(const TagInfo& /*taginfo*/, const TIFFDirEntry& dir,
     }
 }
 
+static void
+usercomment_handler(const TagInfo& taginfo, const TIFFDirEntry& dir,
+                    cspan<uint8_t> buf, ImageSpec& spec,
+                    bool swapendian = false, int offset_adjustment = 0)
+{
+    constexpr size_t head_size = 8;
 
+    const void* data_ptr = dataptr(dir, buf, offset_adjustment);
+    size_t data_size     = tiff_data_size(dir);
+    if (data_ptr == nullptr || data_size <= head_size)
+        return;
+
+    auto data = cspan<char>((const char*)data_ptr, data_size);
+    auto head = data.subspan(0, head_size);
+    auto body = data.subspan(head_size);
+
+    char ascii_head[]   = { 'A', 'S', 'C', 'I', 'I', 0, 0, 0 };
+    char unicode_head[] = { 'U', 'N', 'I', 'C', 'O', 'D', 'E', 0 };
+
+    if (head == cspan<char>(ascii_head)) {
+        spec.attribute(taginfo.name, std::string(body.data(), body.size()));
+    } else if (head == cspan<char>(unicode_head)) {
+        // Body is UCS-2 (UTF-16) in the byte order of the TIFF stream.
+        // Build a u16string, swapping bytes if needed.
+        size_t nchars = body.size() / 2;
+        std::u16string u16;
+        u16.reserve(nchars);
+        auto p = reinterpret_cast<const uint8_t*>(body.data());
+        for (size_t i = 0; i < nchars; ++i, p += 2) {
+            // The Exif byte order matches the enclosing TIFF stream, so
+            // read little-endian and swap if the stream is big-endian.
+            uint16_t ch = uint16_t(p[0]) | (uint16_t(p[1]) << 8);
+            if (swapendian)
+                ch = byteswap(ch);
+            u16.push_back(char16_t(ch));
+        }
+        // Strip trailing null characters before storing.
+        while (!u16.empty() && u16.back() == u'\0')
+            u16.pop_back();
+        spec.attribute(taginfo.name, Strutil::utf16_to_utf8(u16));
+    }
+}
 
 static const TagInfo tiff_tag_table[] = {
     // clang-format off
@@ -480,7 +521,7 @@ static const TagInfo exif_tag_table[] = {
     { EXIF_IMAGEHISTORY,     "Exif:ImageHistory",    TIFF_ASCII, 1 },
     { EXIF_SUBJECTAREA,	"Exif:SubjectArea",	TIFF_NOTYPE, 1 }, // FIXME
     { EXIF_MAKERNOTE,	"Exif:MakerNote",	TIFF_BYTE, 0, makernote_handler },
-    { EXIF_USERCOMMENT,	"Exif:UserComment",	TIFF_BYTE, 0 },
+    { EXIF_USERCOMMENT,	"Exif:UserComment",	TIFF_BYTE, 0, usercomment_handler },
     { EXIF_SUBSECTIME,	"Exif:SubsecTime",	        TIFF_ASCII, 0 },
     { EXIF_SUBSECTIMEORIGINAL,"Exif:SubsecTimeOriginal",	TIFF_ASCII, 0 },
     { EXIF_SUBSECTIMEDIGITIZED,"Exif:SubsecTimeDigitized",	TIFF_ASCII, 0 },
@@ -1024,6 +1065,35 @@ encode_exif_entry(const ParamValue& p, int tag, std::vector<TIFFDirEntry>& dirs,
     size_t count      = (size_t)tagmap.tiffcount(tag);
     TypeDesc element  = p.type().elementtype();
     OIIO_DASSERT(p.data() != nullptr);
+
+    // UserComment requires a special 8-byte charset header before the data.
+    if (tag == EXIF_USERCOMMENT && p.type() == TypeDesc::STRING) {
+        ustring s     = *(const ustring*)p.data();
+        bool is_ascii = std::all_of(s.begin(), s.end(),
+                                    [](unsigned char c) { return c < 0x80; });
+        std::vector<char> payload;
+        if (is_ascii) {
+            const char head[] = { 'A', 'S', 'C', 'I', 'I', 0, 0, 0 };
+            payload.insert(payload.end(), std::begin(head), std::end(head));
+            payload.insert(payload.end(), s.begin(), s.end());
+        } else {
+            const char head[] = { 'U', 'N', 'I', 'C', 'O', 'D', 'E', 0 };
+            payload.insert(payload.end(), std::begin(head), std::end(head));
+            std::wstring w = Strutil::utf8_to_utf16wstring(s);
+            bool swap      = (endianreq != endian::native);
+            for (wchar_t wc : w) {
+                uint16_t u = uint16_t(wc);
+                if (swap)
+                    u = byteswap(u);
+                payload.push_back(char(u & 0xFF));
+                payload.push_back(char(u >> 8));
+            }
+        }
+        append_tiff_dir_entry(dirs, data, tag, TIFF_BYTE, payload.size(),
+                              as_bytes(payload.data(), payload.size()),
+                              offset_correction, 0, endianreq);
+        return;
+    }
 
     switch (type) {
     case TIFF_ASCII:

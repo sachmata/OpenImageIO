@@ -1,3 +1,8 @@
+Local changes (not part of any upstream release)
+---------------------------------------------------------
+  - *exif*: Support reading and writing the Exif UserComment tag with ASCII and Unicode (UCS-2) encodings.
+
+
 Release 3.1.15.0 (Jul 1, 2026) -- compared to 3.1.14.1
 ---------------------------------------------------------
   - *deepdata*: Widen `merge_deep_pixels` srcpixel to int64_t, change its return type, and add `OIIO_NODISCARD_ERROR`. [#5252](https://github.com/AcademySoftwareFoundation/OpenImageIO/pull/5252) [#5253](https://github.com/AcademySoftwareFoundation/OpenImageIO/pull/5253) (by @luna-y-kim / Luna Kim)
