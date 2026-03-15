@@ -369,7 +369,48 @@ makernote_handler(const TagInfo& /*taginfo*/, const TIFFDirEntry& dir,
     }
 }
 
+static void
+usercomment_handler(const TagInfo& taginfo, const TIFFDirEntry& dir,
+                    cspan<uint8_t> buf, ImageSpec& spec,
+                    bool swapendian = false, int offset_adjustment = 0)
+{
+    constexpr size_t head_size = 8;
 
+    const void* data_ptr = dataptr(dir, buf, offset_adjustment);
+    size_t data_size     = tiff_data_size(dir);
+    if (data_ptr == nullptr || data_size <= head_size)
+        return;
+
+    auto data = cspan<char>((const char*)data_ptr, data_size);
+    auto head = data.subspan(0, head_size);
+    auto body = data.subspan(head_size);
+
+    char ascii_head[]   = { 'A', 'S', 'C', 'I', 'I', 0, 0, 0 };
+    char unicode_head[] = { 'U', 'N', 'I', 'C', 'O', 'D', 'E', 0 };
+
+    if (head == cspan<char>(ascii_head)) {
+        spec.attribute(taginfo.name, std::string(body.data(), body.size()));
+    } else if (head == cspan<char>(unicode_head)) {
+        // Body is UCS-2 (UTF-16) in the byte order of the TIFF stream.
+        // Build a u16string, swapping bytes if needed.
+        size_t nchars = body.size() / 2;
+        std::u16string u16;
+        u16.reserve(nchars);
+        auto p = reinterpret_cast<const uint8_t*>(body.data());
+        for (size_t i = 0; i < nchars; ++i, p += 2) {
+            // EXIF byte order matches the enclosing TIFF; swapendian=false
+            // means the stream is little-endian (most cameras).
+            uint16_t ch = swapendian
+                              ? (uint16_t(p[0]) << 8) | p[1]   // big-endian
+                              : uint16_t(p[0]) | (uint16_t(p[1]) << 8);  // little-endian
+            u16.push_back(char16_t(ch));
+        }
+        // Strip trailing null characters before storing.
+        while (!u16.empty() && u16.back() == u'\0')
+            u16.pop_back();
+        spec.attribute(taginfo.name, Strutil::utf16_to_utf8(u16));
+    }
+}
 
 static const TagInfo tiff_tag_table[] = {
     // clang-format off
@@ -464,7 +505,7 @@ static const TagInfo exif_tag_table[] = {
     { EXIF_IMAGEHISTORY,     "Exif:ImageHistory",    TIFF_ASCII, 1 },
     { EXIF_SUBJECTAREA,	"Exif:SubjectArea",	TIFF_NOTYPE, 1 }, // FIXME
     { EXIF_MAKERNOTE,	"Exif:MakerNote",	TIFF_BYTE, 0, makernote_handler },
-    { EXIF_USERCOMMENT,	"Exif:UserComment",	TIFF_BYTE, 0 },
+    { EXIF_USERCOMMENT,	"Exif:UserComment",	TIFF_BYTE, 0, usercomment_handler },
     { EXIF_SUBSECTIME,	"Exif:SubsecTime",	        TIFF_ASCII, 0 },
     { EXIF_SUBSECTIMEORIGINAL,"Exif:SubsecTimeOriginal",	TIFF_ASCII, 0 },
     { EXIF_SUBSECTIMEDIGITIZED,"Exif:SubsecTimeDigitized",	TIFF_ASCII, 0 },
