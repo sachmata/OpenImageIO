@@ -155,6 +155,7 @@ macro (oiio_add_all_tests)
                     oiiotool-xform
                     diff
                     dither dup-channels
+                    exif-usercomment
                     jpeg jpeg-corrupt jpeg-metadata
                     maketx oiiotool-maketx
                     misnamed-file

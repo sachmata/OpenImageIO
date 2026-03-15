@@ -38,6 +38,7 @@ Release 3.2 (target: Sept 2026?) -- compared to 3.1
   - *oiiotool*: Make sure `oiiotool --compression` does expression substitution [#5055](https://github.com/AcademySoftwareFoundation/OpenImageIO/pull/5055) (3.2.0.0, 3.1.11.0)
   - *bmp*: Detect corrupt files where palette doesn't match bpp [#5030](https://github.com/AcademySoftwareFoundation/OpenImageIO/pull/5030) (3.2.0.0, 3.1.11.0)
   - *exif*: Support EXIF 3.0 tags [#4961](https://github.com/AcademySoftwareFoundation/OpenImageIO/pull/4961) (3.2.0.0)
+  - *exif*: Support reading and writing Exif UserComment tag with ASCII and Unicode (UCS-2) encodings
   - *imagebuf*: Fix set_pixels bug, didn't consider roi = All [#4949](https://github.com/AcademySoftwareFoundation/OpenImageIO/pull/4949) (3.2.0.0)
   - *ffmpeg*: 10 bit video had wrong green channel [#4935](https://github.com/AcademySoftwareFoundation/OpenImageIO/pull/4935) (by Brecht Van Lommel) (3.2.0.0, 3.1.7.0)
   - *heif*: Add IOProxy support for both input and output [#5017](https://github.com/AcademySoftwareFoundation/OpenImageIO/pull/5017) (by Brecht Van Lommel) (3.2.0.0, 3.1.10.0)
