@@ -421,7 +421,7 @@ Exif metadata
 
 ..
     % FIXME -- unsupported/undocumented: ExifVersion, FlashpixVersion,
-    % ComponentsConfiguration, MakerNote, UserComment, RelatedSoundFile,
+    % ComponentsConfiguration, MakerNote, RelatedSoundFile,
     % OECF, SubjectArea, SpatialFrequencyResponse, 
     % CFAPattern, DeviceSettingDescription
     %
@@ -573,6 +573,14 @@ A sum of:
 .. option:: "Exif:FocalLength" : float
 
     Actual focal length of the lens, in mm.
+
+.. option:: "Exif:UserComment" : string
+
+    A free-form comment associated with the image. On read, both ASCII and
+    Unicode (UCS-2) encodings are supported; Unicode is decoded to UTF-8.
+    On write, pure-ASCII values are stored with the ASCII charset marker,
+    and any string containing non-ASCII characters is stored as UCS-2 in
+    the byte order of the enclosing TIFF/EXIF stream.
 
 .. option:: "Exif:SecurityClassification" : string
 

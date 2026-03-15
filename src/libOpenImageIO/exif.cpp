@@ -1031,6 +1031,35 @@ encode_exif_entry(const ParamValue& p, int tag, std::vector<TIFFDirEntry>& dirs,
     TypeDesc element  = p.type().elementtype();
     OIIO_DASSERT(p.data() != nullptr);
 
+    // UserComment requires a special 8-byte charset header before the data.
+    if (tag == EXIF_USERCOMMENT && p.type() == TypeDesc::STRING) {
+        ustring s = *(const ustring*)p.data();
+        bool is_ascii = std::all_of(s.begin(), s.end(),
+                                    [](unsigned char c) { return c < 0x80; });
+        std::vector<char> payload;
+        if (is_ascii) {
+            const char head[] = { 'A', 'S', 'C', 'I', 'I', 0, 0, 0 };
+            payload.insert(payload.end(), std::begin(head), std::end(head));
+            payload.insert(payload.end(), s.begin(), s.end());
+        } else {
+            const char head[] = { 'U', 'N', 'I', 'C', 'O', 'D', 'E', 0 };
+            payload.insert(payload.end(), std::begin(head), std::end(head));
+            std::wstring w    = Strutil::utf8_to_utf16wstring(s);
+            bool swap         = (endianreq != endian::native);
+            for (wchar_t wc : w) {
+                uint16_t u = uint16_t(wc);
+                if (swap)
+                    u = byteswap(u);
+                payload.push_back(char(u & 0xFF));
+                payload.push_back(char(u >> 8));
+            }
+        }
+        append_tiff_dir_entry(dirs, data, tag, TIFF_BYTE, payload.size(),
+                              as_bytes(payload.data(), payload.size()),
+                              offset_correction, 0, endianreq);
+        return;
+    }
+
     switch (type) {
     case TIFF_ASCII:
         if (p.type() == TypeDesc::STRING) {

@@ -1,0 +1,246 @@
+Reading src/usercomment-ascii.jpg
+src/usercomment-ascii.jpg :  640 x  480, 3 channel, uint8 jpeg
+    SHA-1: A60D05FC42FDEE2FC8907531E3641C17D7C1E3AB
+    channel list: R, G, B
+    ResolutionUnit: "none"
+    XResolution: 1
+    YResolution: 1
+    Blender:Camera: "Camera"
+    Blender:Date: "2024/09/17 15:50:17"
+    Blender:File: "<untitled>"
+    Blender:Frame: "001"
+    Blender:RenderTime: "00:03.49"
+    Blender:Scene: "Scene"
+    Blender:Time: "00:00:00:01"
+    Exif:ColorSpace: 65535
+    Exif:ExifVersion: "0232"
+    Exif:UserComment: "Hello ASCII"
+    Exif:YCbCrPositioning: 1
+    jpeg:subsampling: "4:2:0"
+    oiio:ColorSpace: "sRGB"
+Reading src/usercomment-unicode.jpg
+src/usercomment-unicode.jpg :  640 x  480, 3 channel, uint8 jpeg
+    SHA-1: A60D05FC42FDEE2FC8907531E3641C17D7C1E3AB
+    channel list: R, G, B
+    ResolutionUnit: "none"
+    XResolution: 1
+    YResolution: 1
+    Blender:Camera: "Camera"
+    Blender:Date: "2024/09/17 15:50:17"
+    Blender:File: "<untitled>"
+    Blender:Frame: "001"
+    Blender:RenderTime: "00:03.49"
+    Blender:Scene: "Scene"
+    Blender:Time: "00:00:00:01"
+    Exif:ColorSpace: 65535
+    Exif:ExifVersion: "0232"
+    Exif:UserComment: "こんにちは"
+    Exif:YCbCrPositioning: 1
+    jpeg:subsampling: "4:2:0"
+    oiio:ColorSpace: "sRGB"
+Reading src/usercomment-ascii.png
+src/usercomment-ascii.png :  256 x  172, 1 channel, uint16 png
+    SHA-1: F84E1B35C5C7107292FD20315C96C101038BC4B1
+    channel list: Y
+    ExposureTime: 0
+    FNumber: 0
+    Make: "Canon"
+    Model: "EOS R"
+    Orientation: 1 (normal)
+    ResolutionUnit: "none"
+    XResolution: 100
+    YResolution: 100
+    Exif:ApertureValue: 0 (f/1.0)
+    Exif:ExifVersion: "0230"
+    Exif:Flash: 0 (no flash)
+    Exif:FlashPixVersion: "0100"
+    Exif:FocalLength: 0 (0 mm)
+    Exif:PhotographicSensitivity: 0
+    Exif:ShutterSpeedValue: 4.65661e-10 (1/1 s)
+    Exif:UserComment: "Hello ASCII"
+    oiio:ColorSpace: "sRGB"
+    raw:Demosaic: "none"
+    raw:FilterPattern: "BGGR"
+Reading src/usercomment-unicode.png
+src/usercomment-unicode.png :  256 x  172, 1 channel, uint16 png
+    SHA-1: F84E1B35C5C7107292FD20315C96C101038BC4B1
+    channel list: Y
+    ExposureTime: 0
+    FNumber: 0
+    Make: "Canon"
+    Model: "EOS R"
+    Orientation: 1 (normal)
+    ResolutionUnit: "none"
+    XResolution: 100
+    YResolution: 100
+    Exif:ApertureValue: 0 (f/1.0)
+    Exif:ExifVersion: "0230"
+    Exif:Flash: 0 (no flash)
+    Exif:FlashPixVersion: "0100"
+    Exif:FocalLength: 0 (0 mm)
+    Exif:PhotographicSensitivity: 0
+    Exif:ShutterSpeedValue: 4.65661e-10 (1/1 s)
+    Exif:UserComment: "こんにちは"
+    oiio:ColorSpace: "sRGB"
+    raw:Demosaic: "none"
+    raw:FilterPattern: "BGGR"
+Reading src/usercomment-ascii.jpg
+src/usercomment-ascii.jpg :  640 x  480, 3 channel, uint8 jpeg
+    SHA-1: A60D05FC42FDEE2FC8907531E3641C17D7C1E3AB
+    channel list: R, G, B
+    ResolutionUnit: "none"
+    XResolution: 1
+    YResolution: 1
+    Blender:Camera: "Camera"
+    Blender:Date: "2024/09/17 15:50:17"
+    Blender:File: "<untitled>"
+    Blender:Frame: "001"
+    Blender:RenderTime: "00:03.49"
+    Blender:Scene: "Scene"
+    Blender:Time: "00:00:00:01"
+    Exif:ColorSpace: 65535
+    Exif:ExifVersion: "0232"
+    Exif:UserComment: "Hello ASCII"
+    Exif:YCbCrPositioning: 1
+    jpeg:subsampling: "4:2:0"
+    oiio:ColorSpace: "sRGB"
+Reading rt-ascii.jpg
+rt-ascii.jpg         :  640 x  480, 3 channel, uint8 jpeg
+    SHA-1: 329B449C07E6649023504E2C8E5130B41985CF7F
+    channel list: R, G, B
+    ResolutionUnit: "none"
+    XResolution: 1
+    YResolution: 1
+    Exif:ColorSpace: 1
+    Exif:ExifVersion: "0230"
+    Exif:FlashPixVersion: "0100"
+    Exif:UserComment: "Hello ASCII"
+    Exif:YCbCrPositioning: 1
+    jpeg:subsampling: "4:2:0"
+    oiio:ColorSpace: "sRGB"
+Reading src/usercomment-unicode.jpg
+src/usercomment-unicode.jpg :  640 x  480, 3 channel, uint8 jpeg
+    SHA-1: A60D05FC42FDEE2FC8907531E3641C17D7C1E3AB
+    channel list: R, G, B
+    ResolutionUnit: "none"
+    XResolution: 1
+    YResolution: 1
+    Blender:Camera: "Camera"
+    Blender:Date: "2024/09/17 15:50:17"
+    Blender:File: "<untitled>"
+    Blender:Frame: "001"
+    Blender:RenderTime: "00:03.49"
+    Blender:Scene: "Scene"
+    Blender:Time: "00:00:00:01"
+    Exif:ColorSpace: 65535
+    Exif:ExifVersion: "0232"
+    Exif:UserComment: "こんにちは"
+    Exif:YCbCrPositioning: 1
+    jpeg:subsampling: "4:2:0"
+    oiio:ColorSpace: "sRGB"
+Reading rt-unicode.jpg
+rt-unicode.jpg       :  640 x  480, 3 channel, uint8 jpeg
+    SHA-1: 329B449C07E6649023504E2C8E5130B41985CF7F
+    channel list: R, G, B
+    ResolutionUnit: "none"
+    XResolution: 1
+    YResolution: 1
+    Exif:ColorSpace: 1
+    Exif:ExifVersion: "0230"
+    Exif:FlashPixVersion: "0100"
+    Exif:UserComment: "こんにちは"
+    Exif:YCbCrPositioning: 1
+    jpeg:subsampling: "4:2:0"
+    oiio:ColorSpace: "sRGB"
+Reading src/usercomment-ascii.png
+src/usercomment-ascii.png :  256 x  172, 1 channel, uint16 png
+    SHA-1: F84E1B35C5C7107292FD20315C96C101038BC4B1
+    channel list: Y
+    ExposureTime: 0
+    FNumber: 0
+    Make: "Canon"
+    Model: "EOS R"
+    Orientation: 1 (normal)
+    ResolutionUnit: "none"
+    XResolution: 100
+    YResolution: 100
+    Exif:ApertureValue: 0 (f/1.0)
+    Exif:ExifVersion: "0230"
+    Exif:Flash: 0 (no flash)
+    Exif:FlashPixVersion: "0100"
+    Exif:FocalLength: 0 (0 mm)
+    Exif:PhotographicSensitivity: 0
+    Exif:ShutterSpeedValue: 4.65661e-10 (1/1 s)
+    Exif:UserComment: "Hello ASCII"
+    oiio:ColorSpace: "sRGB"
+    raw:Demosaic: "none"
+    raw:FilterPattern: "BGGR"
+Reading rt-ascii.png
+rt-ascii.png         :  256 x  172, 1 channel, uint16 png
+    SHA-1: F84E1B35C5C7107292FD20315C96C101038BC4B1
+    channel list: Y
+    ExposureTime: 0
+    FNumber: 0
+    Make: "Canon"
+    Model: "EOS R"
+    Orientation: 1 (normal)
+    ResolutionUnit: "none"
+    XResolution: 100
+    YResolution: 100
+    Exif:ApertureValue: 0 (f/1.0)
+    Exif:ExifVersion: "0230"
+    Exif:Flash: 0 (no flash)
+    Exif:FlashPixVersion: "0100"
+    Exif:FocalLength: 0 (0 mm)
+    Exif:PhotographicSensitivity: 0
+    Exif:ShutterSpeedValue: 0 (1/1 s)
+    Exif:UserComment: "Hello ASCII"
+    oiio:ColorSpace: "sRGB"
+    raw:Demosaic: "none"
+    raw:FilterPattern: "BGGR"
+Reading src/usercomment-unicode.png
+src/usercomment-unicode.png :  256 x  172, 1 channel, uint16 png
+    SHA-1: F84E1B35C5C7107292FD20315C96C101038BC4B1
+    channel list: Y
+    ExposureTime: 0
+    FNumber: 0
+    Make: "Canon"
+    Model: "EOS R"
+    Orientation: 1 (normal)
+    ResolutionUnit: "none"
+    XResolution: 100
+    YResolution: 100
+    Exif:ApertureValue: 0 (f/1.0)
+    Exif:ExifVersion: "0230"
+    Exif:Flash: 0 (no flash)
+    Exif:FlashPixVersion: "0100"
+    Exif:FocalLength: 0 (0 mm)
+    Exif:PhotographicSensitivity: 0
+    Exif:ShutterSpeedValue: 4.65661e-10 (1/1 s)
+    Exif:UserComment: "こんにちは"
+    oiio:ColorSpace: "sRGB"
+    raw:Demosaic: "none"
+    raw:FilterPattern: "BGGR"
+Reading rt-unicode.png
+rt-unicode.png       :  256 x  172, 1 channel, uint16 png
+    SHA-1: F84E1B35C5C7107292FD20315C96C101038BC4B1
+    channel list: Y
+    ExposureTime: 0
+    FNumber: 0
+    Make: "Canon"
+    Model: "EOS R"
+    Orientation: 1 (normal)
+    ResolutionUnit: "none"
+    XResolution: 100
+    YResolution: 100
+    Exif:ApertureValue: 0 (f/1.0)
+    Exif:ExifVersion: "0230"
+    Exif:Flash: 0 (no flash)
+    Exif:FlashPixVersion: "0100"
+    Exif:FocalLength: 0 (0 mm)
+    Exif:PhotographicSensitivity: 0
+    Exif:ShutterSpeedValue: 0 (1/1 s)
+    Exif:UserComment: "こんにちは"
+    oiio:ColorSpace: "sRGB"
+    raw:Demosaic: "none"
+    raw:FilterPattern: "BGGR"

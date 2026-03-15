@@ -1,5 +1,6 @@
 Release 3.0.9.1 (Aug 7, 2025) -- compared to 3.0.9.0
 -----------------------------------------------------
+  - *exif*: Support reading and writing Exif UserComment tag with ASCII and Unicode (UCS-2) encodings
   - *deps*: C++23 support [#4844](https://github.com/AcademySoftwareFoundation/OpenImageIO/pull/4844)
   - *deps*: Adapt to libheif 1.20.2 [#4851](https://github.com/AcademySoftwareFoundation/OpenImageIO/pull/4851) (by toge)
 
